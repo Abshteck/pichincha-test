@@ -8,19 +8,34 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let item of items">
-        <td *ngFor="let header of headers">
-          {{ item[header.key] }}
-        </td>
-      </tr>
+      <ng-container *ngIf="!loading; else skeletonBlock">
+        <tr *ngFor="let item of items">
+          <td *ngFor="let header of headers">
+            {{ item[header.key] }}
+          </td>
+        </tr>
+      </ng-container>
+      <ng-template #skeletonBlock>
+        <tr *ngFor="let _ of skeletonRows">
+          <td>
+            <div class="skeleton image"></div>
+          </td>
+          <td>
+            <div class="skeleton"></div>
+          </td>
+          <td>
+            <div class="skeleton"></div>
+          </td>
+          <td>
+            <div class="skeleton"></div>
+          </td>
+          <td>
+            <div class="skeleton"></div>
+          </td>
+        </tr>
+      </ng-template>
     </tbody>
   </table>
-
-  <div class="skeleton-container" *ngIf="loading">
-    <div class="loader"></div>
-    <div class="loader"></div>
-    <div class="loader"></div>
-  </div>
 
   <div class="no-items-container" *ngIf="!items">
     <p>{{ emptyMessage }}</p>

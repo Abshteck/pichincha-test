@@ -20,4 +20,5 @@ export class TableComponent {
   @Input() items: any[] | null = [];
   @Input() emptyMessage: string = 'Aun no hay elementos';
   @Input() loading: boolean | null = false;
+  skeletonRows = new Array(4);
 }
