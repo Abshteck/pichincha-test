@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ProductsEditorComponent } from './products-editor/products-editor.component';
 import { ProductsListComponent } from './products-list/products-list.component';
 import { RouterModule, Routes } from '@angular/router';
+import { TableComponent } from '../table/table.component';
 
 const routes : Routes = [
   { path: '', component: ProductsListComponent },
@@ -17,7 +18,8 @@ const routes : Routes = [
   ],
   imports: [
     CommonModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    TableComponent
   ]
 })
 export class ProductsModule { }

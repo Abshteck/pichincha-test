@@ -1,0 +1,37 @@
+<div class="table-container">
+  <table>
+    <thead>
+      <tr>
+        <th *ngFor="let header of headers">
+          {{ header.name }}
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of items">
+        <td *ngFor="let header of headers">
+          {{ item[header.key] }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="skeleton-container" *ngIf="loading">
+    <div class="loader"></div>
+    <div class="loader"></div>
+    <div class="loader"></div>
+  </div>
+
+  <div class="no-items-container" *ngIf="!items">
+    <p>{{ emptyMessage }}</p>
+  </div>
+
+  <div class="footer">
+    <p>5 Resultados</p>
+    <select>
+      <option>5</option>
+      <option>10</option>
+      <option>15</option>
+    </select>
+  </div>
+</div>

@@ -1,0 +1,13 @@
+header{
+  display: flex;
+  justify-content: center;
+  padding: 1.5rem;
+}
+header img {
+  height: 7rem;
+}
+.container{
+  background-color: #F4F6F9;
+  flex: 1;
+  padding: 7rem;
+}

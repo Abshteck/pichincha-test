@@ -1,1 +1,11 @@
-<p>products-list works!</p>
+<div class="container">
+  <input type="text" placeholder="Search..." />
+  <div class="table-container">
+    <app-table
+      [headers]="headers"
+      [items]="items | async"
+      emptyMessage="Aún no hay productos registrados"
+      [loading]="itemsLoading | async"
+    />
+  </div>
+</div>
