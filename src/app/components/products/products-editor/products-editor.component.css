@@ -1,0 +1,42 @@
+.container{
+  background-color: white;
+  max-width: 50rem;
+  margin: 0 auto;
+}
+
+.title-container{
+  padding: 2rem 0;
+  text-align: center;
+  border-bottom: 1px solid black;
+}
+
+.form-container{
+  padding: 1rem 2rem;
+}
+
+.form-container form{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap : 1rem;
+}
+
+.input-group{
+  display: flex;
+  flex-direction: column;
+  flex-basis: 45%;
+  height: 6.5rem;
+}
+.input-group input{
+  margin: 10px 0 5px 0;
+}
+.input-group p{
+  color: red;
+}
+
+.actions-container{
+  display: flex;
+  justify-content: center;
+  padding: 2rem 0;
+  gap: 3rem;
+}

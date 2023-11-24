@@ -1,1 +1,189 @@
-<p>products-editor works!</p>
+<div class="container">
+  <div class="title-container">
+    <h1>
+      {{ this.isEditing ? "Formulario de edición" : "Formulario de registro" }}
+    </h1>
+  </div>
+  <div class="form-container">
+    <form [formGroup]="productForm" (ngSubmit)="submitForm()">
+      <div class="input-group">
+        <label for="id">ID</label>
+        <input
+          type="text"
+          formControlName="id"
+          id="id"
+          [ngClass]="{
+            'border-error':
+              productForm.get('id')?.invalid && productForm.get('id')?.touched,
+            'border-loading': productForm.get('id')?.status == 'PENDING'
+          }"
+        />
+        <div
+          *ngIf="
+            productForm.get('id')?.invalid && productForm.get('id')?.touched
+          "
+        >
+          <p *ngIf="productForm.get('id')?.getError('required')">
+            Este campo es requerido!
+          </p>
+          <p *ngIf="productForm.get('id')?.getError('minlength')">
+            El ID debe ser de al menos 3 caracteres!
+          </p>
+          <p *ngIf="productForm.get('id')?.getError('maxlength')">
+            El ID debe ser de máximo 10 caracteres!
+          </p>
+          <p *ngIf="productForm.get('id')?.getError('productExistsValidator')">
+            El ID ya existe!
+          </p>
+        </div>
+      </div>
+      <div class="input-group">
+        <label for="name">Nombre</label>
+        <input
+          type="text"
+          formControlName="name"
+          id="name"
+          [ngClass]="{
+            'border-error':
+              productForm.get('name')?.invalid &&
+              productForm.get('name')?.touched,
+          }
+          "
+        />
+        <div
+          *ngIf="
+            productForm.get('name')?.invalid && productForm.get('name')?.touched
+          "
+        >
+          <p *ngIf="productForm.get('name')?.getError('required')">
+            Este campo es requerido!
+          </p>
+          <p *ngIf="productForm.get('name')?.getError('minlength')">
+            El nombre debe ser de al menos 5 caracteres!
+          </p>
+          <p *ngIf="productForm.get('name')?.getError('maxlength')">
+            El nombre debe ser de máximo 100 caracteres!
+          </p>
+        </div>
+      </div>
+      <div class="input-group">
+        <label for="description">Descripción</label>
+        <input
+          type="text"
+          formControlName="description"
+          id="description"
+          [ngClass]="{
+            'border-error':
+              productForm.get('description')?.invalid &&
+              productForm.get('description')?.touched
+          }"
+        />
+
+        <div
+          *ngIf="
+            productForm.get('description')?.invalid &&
+            productForm.get('description')?.touched
+          "
+        >
+          <p *ngIf="productForm.get('description')?.getError('required')">
+            Este campo es requerido!
+          </p>
+          <p *ngIf="productForm.get('description')?.getError('minlength')">
+            La descripción debe ser de al menos 10 caracteres!
+          </p>
+          <p *ngIf="productForm.get('description')?.getError('maxlength')">
+            La descripción debe ser de máximo 200 caracteres!
+          </p>
+        </div>
+      </div>
+      <div class="input-group">
+        <label for="logo">Logo</label>
+        <input
+          type="text"
+          formControlName="logo"
+          id="logo"
+          [ngClass]="{
+            'border-error':
+              productForm.get('logo')?.invalid &&
+              productForm.get('logo')?.touched,
+          }
+          "
+        />
+
+        <div
+          *ngIf="
+            productForm.get('logo')?.invalid && productForm.get('logo')?.touched
+          "
+        >
+          <p>Este campo es requerido!</p>
+        </div>
+      </div>
+      <div class="input-group">
+        <label for="date_release">Fecha Liberación</label>
+        <input
+          type="text"
+          formControlName="date_release"
+          id="date_release"
+          placeholder="dd/mm/aaaa"
+          (input)="dateReleaseChange()"
+          [ngClass]="{
+            'border-error':
+              productForm.get('date_release')?.invalid &&
+              productForm.get('date_release')?.touched,
+            'border-loading':
+              productForm.get('date_release')?.status == 'PENDING'
+          }"
+          appDateFormat
+        />
+
+        <div
+          *ngIf="
+            productForm.get('date_release')?.invalid &&
+            (productForm.get('date_release')?.touched || this.isEditing)
+          "
+        >
+          <p *ngIf="productForm.get('date_release')?.getError('required')">
+            Este campo es requerido!
+          </p>
+          <p
+            *ngIf="
+              productForm
+                .get('date_release')
+                ?.getError('dateEqualOrGreaterThan')
+            "
+          >
+            La fecha de liberación debe ser mayor o igual a la fecha actual!
+          </p>
+        </div>
+      </div>
+      <div class="input-group">
+        <label for="date_revision">Fecha Revision</label>
+        <input
+          type="text"
+          formControlName="date_revision"
+          placeholder="dd/mm/aaaa"
+          id="date_revision"
+          appDateFormat
+        />
+      </div>
+      <div class="actions-container">
+        <button type="button" class="secondary" (click)="resetForm()">
+          Reiniciar
+        </button>
+        <button
+          type="submit"
+          [disabled]="
+            productForm.invalid ||
+            productForm.status == 'INVALID' ||
+            productForm.status == 'PENDING'
+          "
+          [ngClass]="{
+            'background-loading': sending
+          }"
+        >
+          {{ this.isEditing ? "Editar" : "Enviar" }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

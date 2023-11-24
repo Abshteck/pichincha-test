@@ -1,0 +1,12 @@
+<div class="container">
+  <div class="dots-container" (click)="toggleMenu()">
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+  <div *ngIf="showing" class="dropdown-content">
+    <div (click)="buttonPressed(item.action)" *ngFor="let item of items">
+      <p>{{ item.name }}</p>
+    </div>
+  </div>
+</div>

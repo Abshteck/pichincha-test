@@ -4,11 +4,13 @@ import { ProductsEditorComponent } from './products-editor/products-editor.compo
 import { ProductsListComponent } from './products-list/products-list.component';
 import { RouterModule, Routes } from '@angular/router';
 import { TableComponent } from '../table/table.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DateFormatDirective } from 'src/app/directives/date-format.directive';
 
 const routes : Routes = [
   { path: '', component: ProductsListComponent },
   { path: 'create', component: ProductsEditorComponent },
-  { path: 'edit', component: ProductsEditorComponent }
+  { path: 'edit/:id', component: ProductsEditorComponent }
 ];
 
 @NgModule({
@@ -19,7 +21,10 @@ const routes : Routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-    TableComponent
+    TableComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    DateFormatDirective
   ]
 })
 export class ProductsModule { }

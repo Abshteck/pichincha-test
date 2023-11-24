@@ -1,5 +1,7 @@
 import { ProductsService } from './../../../services/products.service';
 import { Component, OnInit } from '@angular/core';
+import { Action } from '../../table/table.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-products-list',
@@ -8,30 +10,53 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProductsListComponent implements OnInit {
   headers = [{
-    name: 'Logo',
-    key: 'logo'
+    headerName: 'Logo',
+    key: 'logo',
+    type: 'image'
   },{
-    name: 'Nombre del producto',
-    key: 'name'
+    headerName: 'Nombre del producto',
+    key: 'name',
+    type: 'text'
   },{
-    name: 'Descripción',
-    key: 'description'
+    headerName: 'Descripción',
+    key: 'description',
+    type: 'text'
   },{
-    name: 'Fecha de liberación',
-    key: 'date_release'
+    headerName: 'Fecha de liberación',
+    key: 'date_release',
+    type: 'date'
   },{
-    name: 'Fecha de reestructuración',
-    key: 'date_revision'
+    headerName: 'Fecha de reestructuración',
+    key: 'date_revision',
+    type: 'date'
   }];
   items = this._productsService.products$;
   itemsLoading = this._productsService.loading$;
+  filtersKeys = ['id','name','description'];
+  filter = '';
 
   constructor(
-    private _productsService: ProductsService
+    private _productsService: ProductsService,
+    private router: Router
   ){}
 
   ngOnInit(): void {
     this._productsService.getProducts()
   }
+
+  handleAction(action : Action): void {
+    switch(action.name) {
+      case 'delete':
+        //this._productsService.deleteProduct(action.item.id);
+        break;
+      case 'edit':
+        this.router.navigate(['/products/edit', action.item.id]);
+        break;
+    }
+  }
+
+
+
+
 
 }

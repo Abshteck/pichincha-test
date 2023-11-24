@@ -14,13 +14,11 @@
   width: 100%;
 }
 
-/* Track */
 .table-container::-webkit-scrollbar-track {
   border-radius: 10px;
   background-color: #dad7d7;
 }
 
-/* Handle */
 .table-container::-webkit-scrollbar-thumb {
   background: #888;
   border-radius: 10px;
@@ -49,6 +47,10 @@ thead tr{
 td{
   text-align: center;
   padding: 1rem;
+}
+
+td:last-child{
+  padding: 0;
 }
 
 .no-items-container{

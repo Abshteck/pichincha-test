@@ -23,3 +23,83 @@ input:focus,select:focus {
   outline: none;
   border-color: blueviolet;
 }
+
+
+button,.button-link{
+  background-color: #F9DE4B;
+  color: #152559;
+  padding: 1rem 1.8rem;
+  border: 0;
+  font-size: 1rem;
+  font-weight: bold;
+  text-decoration: none;
+  border-radius: 0.2rem;
+}
+
+button.secondary{
+  background-color: #E9ECF3;
+}
+
+button:disabled{
+  background-color: #FFF199;
+  color: #BFC0B1;
+}
+
+button:hover{
+  cursor: pointer;
+}
+
+.border-error{
+  border: 1px solid red;
+}
+.border-loading {
+  border: 1px solid #ff007f;
+  animation: borderLoadingAnimation 1s infinite linear;
+}
+
+.background-loading {
+  background-color: #ff007f;
+  animation: backgroundLoadingAnimation 1s infinite linear;
+}
+
+@keyframes borderLoadingAnimation {
+  0% {
+    border: 1px solid #F9DE4B;
+  }
+  50% {
+    border: 1px solid #152559;
+  }
+  100% {
+    border-left: 1px solid #F9DE4B;
+  }
+}
+
+@keyframes backgroundLoadingAnimation {
+  0% {
+    background-color: #F9DE4B;
+  }
+  50% {
+    background-color: blueviolet;
+  }
+  100% {
+    background-color: #F9DE4B;
+  }
+}
+
+img{
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.img-circle-container{
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+}
+
+
+

@@ -1,11 +1,17 @@
 <div class="container">
-  <input type="text" placeholder="Search..." />
+  <div class="options-container">
+    <input [(ngModel)]="filter" type="text" placeholder="Search..." />
+    <a type="button" class="button-link" routerLink="create">Agregar</a>
+  </div>
   <div class="table-container">
     <app-table
       [headers]="headers"
       [items]="items | async"
       emptyMessage="Aún no hay productos registrados"
       [loading]="itemsLoading | async"
+      (onAction)="handleAction($event)"
+      [filterKeys]="filtersKeys"
+      [filter]="filter"
     />
   </div>
 </div>

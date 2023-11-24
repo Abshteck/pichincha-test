@@ -5,10 +5,18 @@
   gap: 1rem;
 }
 
+.options-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+}
+
 .table-container{
   width: 100%;
   padding: 2rem;
   background-color: white;
   border-radius: 0.5rem;
 }
+
 

@@ -3,11 +3,20 @@ header{
   justify-content: center;
   padding: 1.5rem;
 }
-header img {
-  height: 7rem;
+.logo-container {
+  height: 6rem;
+  display: flex;
 }
 .container{
   background-color: #F4F6F9;
   flex: 1;
-  padding: 7rem;
+  padding: 2rem;
+}
+
+/* when using laptop screen */
+
+@media screen and (min-width: 1024px) {
+  .container{
+    padding: 7rem 10rem;
+  }
 }
