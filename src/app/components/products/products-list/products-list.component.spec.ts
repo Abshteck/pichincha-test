@@ -4,6 +4,8 @@ import { ProductsService } from './../../../services/products.service';
 import { Router } from '@angular/router';
 import { ConfirmDialogService } from 'src/app/services/confirm-dialog.service';
 import { of } from 'rxjs';
+import { TableComponent } from '../../table/table.component';
+import { FormsModule } from '@angular/forms';
 
 describe('ProductsListComponent', () => {
   let component: ProductsListComponent;
@@ -30,6 +32,7 @@ describe('ProductsListComponent', () => {
 
     await TestBed.configureTestingModule({
       declarations: [ProductsListComponent],
+      imports: [TableComponent,FormsModule],
       providers: [
         { provide: ProductsService, useValue: productServiceMock },
         { provide: Router, useValue: routerMock },
