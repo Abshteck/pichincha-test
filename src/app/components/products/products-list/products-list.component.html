@@ -8,7 +8,7 @@
       [headers]="headers"
       [items]="items | async"
       emptyMessage="Aún no hay productos registrados"
-      [loading]="itemsLoading | async"
+      [loading]="(itemsLoading | async) || actionLoading"
       (onAction)="handleAction($event)"
       [filterKeys]="filtersKeys"
       [filter]="filter"

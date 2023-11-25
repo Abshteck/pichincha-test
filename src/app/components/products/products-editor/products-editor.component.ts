@@ -53,6 +53,7 @@ export class ProductsEditorComponent implements OnInit {
         // if there is not a product with that id redirect to products list
         if (!product) {
           this.router.navigate(['/products']);
+          return
         }else{
           this.isEditing = true;
           this.productForm.patchValue({

@@ -1,7 +1,8 @@
 import { ProductsService } from './../../../services/products.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { Action } from '../../table/table.component';
 import { Router } from '@angular/router';
+import { ConfirmDialogService } from 'src/app/services/confirm-dialog.service';
 
 @Component({
   selector: 'app-products-list',
@@ -34,10 +35,13 @@ export class ProductsListComponent implements OnInit {
   itemsLoading = this._productsService.loading$;
   filtersKeys = ['id','name','description'];
   filter = '';
+  actionLoading = false;
 
   constructor(
     private _productsService: ProductsService,
-    private router: Router
+    private router: Router,
+    private _confirmDialog: ConfirmDialogService,
+    private _viewContainerRef: ViewContainerRef
   ){}
 
   ngOnInit(): void {
@@ -47,7 +51,24 @@ export class ProductsListComponent implements OnInit {
   handleAction(action : Action): void {
     switch(action.name) {
       case 'delete':
-        //this._productsService.deleteProduct(action.item.id);
+        const observableResult = this._confirmDialog.openConfirmDialog(
+          this._viewContainerRef,
+          `¿Estás seguro de eliminar el producto ${action.item.name} ?`
+          ).subscribe((confirmed) => {
+            if(confirmed){
+              this.actionLoading = true;
+              this._productsService.deleteProduct(action.item.id)
+              .subscribe({
+                next: () => {
+                  this.actionLoading = false;
+                },
+                error: (error) => {
+                  this.actionLoading = false;
+                }
+              })
+            }
+            observableResult.unsubscribe();
+          })
         break;
       case 'edit':
         this.router.navigate(['/products/edit', action.item.id]);

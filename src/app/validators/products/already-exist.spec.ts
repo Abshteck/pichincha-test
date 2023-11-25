@@ -1,20 +1,32 @@
-import { TestBed } from '@angular/core/testing';
+import {  AsyncValidatorFn, FormControl } from '@angular/forms';
+import { of } from 'rxjs';
 import { productExistsValidator } from './already-exist';
-import { ProductsService } from 'src/app/services/products.service';
-describe('productExistsValidator', () => {
-  let productServiceSpy: jasmine.SpyObj<ProductsService>;
 
-  beforeEach(() => {
-    const spy = jasmine.createSpyObj('ProductsService', ['productExists']);
-    TestBed.configureTestingModule({
-      providers: [
-        { provide: ProductsService, useValue: spy }
-      ]
-    });
-    productServiceSpy = TestBed.inject(ProductsService) as jasmine.SpyObj<ProductsService>;
+describe('ProductExistsValidator', () => {
+
+  let productsServiceMock = {
+    productExists: jest.fn(),
+  } as any;
+
+  it('should validate product existence asynchronously', async () => {
+    const validator : any = productExistsValidator(productsServiceMock);
+    productsServiceMock.productExists.mockReturnValue(of(true));
+
+    const control = new FormControl('existingProductId');
+    const result = await validator(control).toPromise()
+
+    expect(result.productExistsValidator).toBe(true)
+    expect(productsServiceMock.productExists).toHaveBeenCalledWith('existingProductId');
   });
 
-  it('should create an instance', () => {
-    expect(productExistsValidator(productServiceSpy)).toBeTruthy();
+  it('should handle non-existing product', async () => {
+    const validator : any = productExistsValidator(productsServiceMock);
+    productsServiceMock.productExists.mockReturnValue(of(false));
+
+    const control = new FormControl('nonExistingProductId');
+    const result = await validator(control).toPromise()
+
+    expect(result).toEqual(null);
+    expect(productsServiceMock.productExists).toHaveBeenCalledWith('nonExistingProductId');
   });
 });

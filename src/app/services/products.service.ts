@@ -46,8 +46,6 @@ export class ProductsService {
     product.date_release = this.formatDate(product.date_release);
     product.date_revision = this.formatDate(product.date_revision);
 
-    console.log(product)
-
     return this._http.post(environment.apiUrl + '/bp/products', product)
     .pipe(
       map((response: any) => {
@@ -59,12 +57,17 @@ export class ProductsService {
   }
 
   deleteProduct(id: string) {
-    return this._http.delete(environment.apiUrl + '/bp/products/' + id)
+    return this._http.delete(environment.apiUrl + '/bp/products' , {
+      params: {
+        id
+      },
+      responseType: 'text'
+    })
     .pipe(
-      map((response: any) => {
+      map(() => {
         const products = this.productsSubject.value.filter((product: Product) => product.id !== id);
         this.productsSubject.next(products);
-        return response;
+        return;
       })
     );
   }
@@ -75,7 +78,6 @@ export class ProductsService {
   }
 
   editProduct(product: any) {
-    console.log(product)
     // change dates format from dd/mm/yyyy to dd-mm-yyyy
     product.date_release = this.formatDate(product.date_release);
     product.date_revision = this.formatDate(product.date_revision);

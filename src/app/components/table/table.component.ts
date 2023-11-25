@@ -30,7 +30,7 @@ export class TableComponent {
   @Input() items: any[] | null = [];
   @Input() emptyMessage: string = 'Aun no hay elementos';
   @Input() loading: boolean | null = false;
-  @Input() limiters: any[] = [5,10,15];
+  @Input() limiters: any[] = [5,10,20];
   @Input() filterKeys: string[] | null = null;
   @Input() filter: string | null = null;
   @Output() onAction = new EventEmitter<Action>();
@@ -47,7 +47,6 @@ export class TableComponent {
   }
 
   filterItems(items : any[]){
-    console.log(this.filter)
     if(this.filterKeys && this.filter){
       return items.filter((item) => {
         let match = false;

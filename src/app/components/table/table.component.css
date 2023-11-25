@@ -66,6 +66,7 @@ td:last-child{
 
 .footer{
   width: 100%;
+  margin-bottom: 15px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
