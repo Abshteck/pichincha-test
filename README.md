@@ -1,19 +1,33 @@
-# PichinchaTest
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.4.
+# Pichincha test
 
-## Development server
+Prueba tecnica para desarrollador frontend en angular realizada por Emilio Silva.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-## Code scaffolding
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Ejecución
 
-## Build
+Para ejecutar este proyecto de manera local, se deben correr los siguientes comandos:
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+```bash
+  npm install
+```
+```bash
+  ng serve
+```
 
-## Further help
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+## Testear el código
+
+Para correr los test unitarios, utilizar el siguiente comando:
+
+```bash
+  npm run test 
+```
+
+Correr los test unitarios y obtener la tabla con el coverage:
+
+```bash
+  npm run test:coverage
+```
